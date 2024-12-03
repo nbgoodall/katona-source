@@ -19,7 +19,7 @@
         <section class="gh-content gh-canvas is-body">
             {{content}}
 
-            {{#get "posts" limit="all" include="authors" order="published_at desc"}}
+            {{#get "posts" limit="all" order="published_at desc"}}
                 {{#foreach posts}}
                     <a href='{{url}}' class='post-archive-item' year="{{date format=(t 'YYYY')}}" month="{{date format=(t 'MMMM')}}">
                         <time class="button is-static is-size-7">{{date published_at format=(t "Do")}}</time>

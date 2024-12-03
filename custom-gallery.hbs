@@ -1,0 +1,70 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#post}}
+
+<main class="gh-main">
+    <article class="gh-article {{post_class}}">
+
+        {{#match @page.show_title_and_feature_image}}
+            <header class="gh-article-header gh-canvas">
+                <h1 class="gh-article-title is-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="gh-article-excerpt is-body">{{custom_excerpt}}</p>
+                {{/if}}
+                {{> "feature-image"}}
+            </header>
+        {{/match}}
+
+        <section class="gh-content gh-canvas is-body">
+            {{content}}
+
+            <figure class="kg-card kg-gallery-card kg-width-wide">
+                <div class="kg-gallery-container"></div>
+            </figure>
+
+            {{#get "posts" limit="all" order="published_at desc"}}
+                {{#foreach posts}}
+                    <div class="post-content" style="display: none;">{{content}}></div>
+                {{/foreach}}
+            {{/get}}
+        </section>
+
+
+    </article>
+</main>
+
+{{/post}}
+
+<script>
+    const IMAGE_REGEX = /<img\s+src="([^"]+)"\s+alt="([^"]+)">/g
+
+    let images = []
+
+    document.querySelectorAll('.post-content').forEach(content => {
+        const post_images = content.querySelectorAll('img')
+
+        images = images.concat(Array.from(post_images).reverse())
+    })
+
+    const gallery = document.querySelector('.kg-gallery-container')
+
+    for (let i = 0; i < images.length; i += 3) {
+        const row = document.createElement('div');
+        row.classList.add('kg-gallery-row');
+
+        for (let j = i; j < i + 3; j++) {
+            if (!images[i + j]) continue;
+
+            const image_container = document.createElement('div')
+            image_container.href = 'https://katona.blog'
+            image_container.classList.add('kg-gallery-image')
+
+            image_container.appendChild(images[i + j])
+            row.appendChild(image_container)
+        }
+
+        gallery.appendChild(row)
+    }
+
+</script>

@@ -3336,3 +3336,34 @@ figcaption a {
 .pswp--minimal--dark .pswp__top-bar {
     background: none;
 }
+
+/* Custom  */
+
+
+/* Archive  */
+
+.archive {
+
+}
+
+.gh-content a.post-archive-item {
+    color: initial;
+    text-decoration: none;
+    font-size: calc(1.3em * var(--factor, 1));
+    letter-spacing: -0.017em;
+    margin-left: 25px;
+}
+
+.gh-content a.post-archive-item span {
+    font-weight: 500;
+}
+
+.gh-content a.post-archive-item:hover span {
+    color: var(--ghost-accent-color);
+}
+
+.gh-content a.post-archive-item time {
+    color: var(--color-dark-gray);
+    display: inline-block;
+    width: 75px;
+}

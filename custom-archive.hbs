@@ -1,0 +1,59 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file into the body of the default.hbs template --}}
+
+{{#post}}
+
+<main class="gh-main">
+    <article class="gh-article {{post_class}}">
+
+        {{#match @page.show_title_and_feature_image}}
+            <header class="gh-article-header gh-canvas">
+                <h1 class="gh-article-title is-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="gh-article-excerpt is-body">{{custom_excerpt}}</p>
+                {{/if}}
+                {{> "feature-image"}}
+            </header>
+        {{/match}}
+
+        <section class="gh-content gh-canvas is-body">
+            {{content}}
+
+            {{#get "posts" limit="all" include="authors" order="published_at desc"}}
+                {{#foreach posts}}
+                    <a href='{{url}}' class='post-archive-item' year="{{date format=(t 'YYYY')}}" month="{{date format=(t 'MMMM')}}">
+                        <time class="button is-static is-size-7">{{date published_at format=(t "Do")}}</time>
+                        <span>{{title}}</span>
+                    </a>
+                {{/foreach}}
+            {{/get}}
+        </section>
+
+    </article>
+</main>
+
+{{/post}}
+
+<script>
+    const years = new Set();
+    const months = {};
+
+    document.querySelectorAll('.post-archive-item').forEach(function(node) {
+        const archives_year = node.getAttribute('year'),
+            archives_month = node.getAttribute('month');
+
+        years.add(archives_year);
+        months[archives_year] = months[archives_year] || new Set();
+        months[archives_year].add(archives_month);
+    });
+
+    for (const year of years) {
+        document.querySelector("[year='" + year + "']")
+            .insertAdjacentHTML('beforebegin', '<hr><h2>' + year + '</h2>');
+
+        for (const month of months[year]) {
+            document.querySelector("[year='" + year + "'][month='" + month + "']")
+                .insertAdjacentHTML('beforebegin', '<h3>' + month + '</h3>');
+        }
+    }
+</script>

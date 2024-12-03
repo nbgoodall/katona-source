@@ -760,7 +760,7 @@ Search                         LOGO                    Login Subscribe
     }
 
     #gh-navigation {
-        height: 64px;
+        height: 80px;
     }
 
     #gh-navigation .gh-navigation-inner {
@@ -774,7 +774,7 @@ Search                         LOGO                    Login Subscribe
         grid-template-columns: 1fr auto auto;
         grid-column-start: 1;
         align-items: center;
-        height: 64px;
+        height: 80px;
     }
 
     #gh-navigation .gh-navigation-logo {
@@ -1642,7 +1642,7 @@ Search                         LOGO                    Login Subscribe
 /* 11.2. Without sidebar */
 
 .gh-container:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
-    grid-column: 3 / span 12;
+    grid-column: 5 / span 8;
 }
 
 .gh-container.is-list.no-image:not(.has-sidebar) :is(.gh-container-title, .gh-main, .gh-more) {
@@ -3340,18 +3340,29 @@ figcaption a {
 /* Custom  */
 
 
-/* Archive  */
+/* Nav  */
 
-.archive {
-
+@media (min-width: 768px) {
+    .gh-navigation-brand > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
+
+.gh-navigation-brand > div > p {
+    margin-top: 10px;
+}
+
+/* Archive  */
 
 .gh-content a.post-archive-item {
     color: initial;
     text-decoration: none;
-    font-size: calc(1.3em * var(--factor, 1));
-    letter-spacing: -0.017em;
+/*    font-size: calc(1.1em * var(--factor, 1));*/
+/*    letter-spacing: -0.017em;*/
     margin-left: 25px;
+    margin-top: 16px;
 }
 
 .gh-content a.post-archive-item span {
